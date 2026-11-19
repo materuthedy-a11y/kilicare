@@ -15,7 +15,14 @@ export default function SiteHeader() {
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState('');
   const progress = useRef<HTMLElement>(null);
+  const menuRef = useRef<HTMLDivElement>(null);
+  const toggleRef = useRef<HTMLButtonElement>(null);
   const lastY = useRef(0);
+
+  const closeMenu = () => {
+    setOpen(false);
+    toggleRef.current?.focus();
+  };
 
   useEffect(() => {
     let ticking = false;
@@ -38,7 +45,7 @@ export default function SiteHeader() {
     }, { rootMargin: '-35% 0px -55% 0px' });
     trackedSections.forEach((id) => { const el = document.getElementById(id); if (el) observer.observe(el); });
 
-    const onKey = (event: KeyboardEvent) => { if (event.key === 'Escape') setOpen(false); };
+    const onKey = (event: KeyboardEvent) => { if (event.key === 'Escape') { setOpen(false); toggleRef.current?.focus(); } };
     window.addEventListener('keydown', onKey);
     return () => {
       window.removeEventListener('scroll', onScroll);
@@ -51,6 +58,20 @@ export default function SiteHeader() {
     document.body.style.overflow = open ? 'hidden' : '';
     return () => { document.body.style.overflow = ''; };
   }, [open]);
+
+  useEffect(() => {
+    if (open) menuRef.current?.querySelector<HTMLElement>('a')?.focus();
+  }, [open]);
+
+  const onMenuKeyDown = (event: React.KeyboardEvent) => {
+    if (event.key !== 'Tab' || !menuRef.current) return;
+    const focusables = [...menuRef.current.querySelectorAll<HTMLElement>('a[href]')];
+    if (!focusables.length) return;
+    const first = focusables[0];
+    const last = focusables[focusables.length - 1];
+    if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
+    else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
+  };
 
   useEffect(() => {
     const onResize = () => { if (window.innerWidth > 767) setOpen(false); };
@@ -67,16 +88,16 @@ export default function SiteHeader() {
         </nav>
         <div className="header-actions">
           <a className="header-cta" href="#booking">Book your trip <span className="cta-arrow" aria-hidden="true">↗</span></a>
-          <button className="menu-toggle" type="button" aria-label={open ? 'Close menu' : 'Open menu'} aria-expanded={open} aria-controls="mobile-menu" onClick={() => setOpen(!open)}><span /><span /></button>
+          <button ref={toggleRef} className="menu-toggle" type="button" aria-label={open ? 'Close menu' : 'Open menu'} aria-expanded={open} aria-controls="mobile-menu" onClick={() => setOpen(!open)}><span /><span /></button>
         </div>
       </div>
       <div className="scroll-progress" aria-hidden="true"><i ref={progress} /></div>
     </header>
-    <div className={`mobile-menu${open ? ' is-open' : ''}`} id="mobile-menu" aria-hidden={!open}>
+    <div className={`mobile-menu${open ? ' is-open' : ''}`} id="mobile-menu" aria-hidden={!open} ref={menuRef} onKeyDown={onMenuKeyDown} onClick={(event) => { if (event.target === event.currentTarget) closeMenu(); }}>
       <nav aria-label="Mobile navigation">
-        {links.map(([label, href], index) => <a href={href} key={label} style={{ '--i': index } as CSSProperties} onClick={() => setOpen(false)}>{label}</a>)}
+        {links.map(([label, href], index) => <a href={href} key={label} style={{ '--i': index } as CSSProperties} onClick={closeMenu}>{label}</a>)}
       </nav>
-      <a className="mobile-cta" href="#booking" onClick={() => setOpen(false)}>Book your trip <span aria-hidden="true">↗</span></a>
+      <a className="mobile-cta" href="#booking" onClick={closeMenu}>Book your trip <span aria-hidden="true">↗</span></a>
     </div>
   </>;
 }

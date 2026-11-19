@@ -78,6 +78,7 @@ img{max-width:100%;display:block}
 .mobile-menu nav a{font-family:var(--display);font-size:clamp(34px,9vw,54px);font-weight:700;line-height:1.25;color:#fffaf1;padding:8px 0;opacity:0;transform:translateY(26px);transition:opacity .45s ease-out,transform .45s ease-out,color .25s}
 .mobile-menu.is-open nav a{opacity:1;transform:none;transition-delay:calc(90ms + var(--i,0)*65ms)}
 .mobile-menu nav a:hover{color:#F59E0B}
+.mobile-menu nav a:focus-visible,.mobile-cta:focus-visible,.menu-toggle:focus-visible,.main-nav a:focus-visible,.header-cta:focus-visible{outline:2px solid #F59E0B;outline-offset:4px;border-radius:4px}
 .mobile-cta{display:inline-flex;align-items:center;justify-content:space-between;gap:14px;align-self:flex-start;margin-top:38px;min-height:52px;padding:8px 10px 8px 26px;border-radius:999px;background:#F59E0B;color:#191613;font-size:15px;font-weight:700;opacity:0;transform:translateY(26px);transition:opacity .45s ease-out .55s,transform .45s ease-out .55s}
 .mobile-cta span{display:grid;place-items:center;width:34px;height:34px;border-radius:50%;background:rgba(20,16,12,.15);font-size:17px}
 .mobile-menu.is-open .mobile-cta{opacity:1;transform:none}
