@@ -2100,6 +2100,18 @@ img {
   color: #f8f2e8;
   overflow: hidden;
 }
+.orbit-word {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(28px);
+  animation: orbit-word-in 0.7s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+@keyframes orbit-word-in {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 .orbit-head {
   display: flex;
   flex-wrap: wrap;
