@@ -2201,9 +2201,9 @@ img {
   position: absolute;
   left: 50%;
   top: 50%;
-  width: min(30vw, 300px);
+  width: min(34vw, 340px);
   aspect-ratio: 1;
-  margin-left: calc(min(30vw, 300px) / -2);
+  margin-left: calc(min(34vw, 340px) / -2);
   will-change: transform, opacity;
   transition: opacity 0.4s;
 }
@@ -2236,6 +2236,85 @@ img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.dorbit-name {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 26px 14px 16px;
+  background: linear-gradient(transparent, rgba(5, 10, 18, 0.88));
+  color: #fffaf1;
+  font-family: var(--outfit);
+  font-size: clamp(15px, 1.4vw, 20px);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  text-align: center;
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.4s, transform 0.4s;
+  pointer-events: none;
+}
+.dorbit:hover .dorbit-in img,
+.dorbit:focus-visible .dorbit-in img,
+.dorbit.is-front .dorbit-in img {
+  transform: scale(1.1);
+}
+.dorbit:hover .dorbit-name,
+.dorbit:focus-visible .dorbit-name,
+.dorbit.is-front .dorbit-name {
+  opacity: 1;
+  transform: translateY(0);
+}
+.dorbit-info {
+  position: absolute;
+  top: calc(100% + 12px);
+  left: 50%;
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  width: max-content;
+  max-width: 240px;
+  padding: 10px 18px;
+  border: 1px solid rgba(245, 158, 11, 0.4);
+  border-radius: 16px;
+  background: rgba(18, 14, 12, 0.85);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.45);
+  color: #fffaf1;
+  text-align: center;
+  opacity: 0;
+  transform: translate(-50%, 10px);
+  transition: opacity 0.35s ease-out, transform 0.35s ease-out;
+  pointer-events: none;
+}
+.dorbit-info strong {
+  font-family: var(--outfit);
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+.dorbit-info span {
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #f4bd60;
+}
+.dorbit:hover .dorbit-info,
+.dorbit:focus-visible .dorbit-info,
+.dorbit.is-front .dorbit-info {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+@media (max-width: 1000px) {
+  .dorbit {
+    width: min(62vw, 260px);
+    margin-left: calc(min(62vw, 260px) / -2);
+  }
 }
 @keyframes dorbit-bob {
   0%,

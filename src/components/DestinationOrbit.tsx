@@ -121,8 +121,12 @@ export default function DestinationOrbit() {
       </div>
 
       <div className="orbit-ring" ref={orbitRef} aria-label="Tanzania destinations">
-        {destinations.map((d, j) => <div className="dorbit" key={d.name} ref={(el) => { orbRefs.current[j] = el; }} aria-hidden={j !== idx}>
-          <div className="dorbit-in"><Image src={`/img/destinations/${d.image}.webp`} alt={j === idx ? `${d.name}, ${d.region}` : ''} width={220} height={220} sizes="(max-width: 1000px) 40vw, 22vw" /></div>
+        {destinations.map((d, j) => <div className="dorbit" key={d.name} ref={(el) => { orbRefs.current[j] = el; }} aria-hidden={j !== idx} tabIndex={j === idx ? 0 : -1}>
+          <div className="dorbit-in">
+            <Image src={`/img/destinations/${d.image}.webp`} alt={j === idx ? `${d.name}, ${d.region}` : ''} width={220} height={220} sizes="(max-width: 1000px) 40vw, 22vw" />
+            <span className="dorbit-name">{d.name}</span>
+          </div>
+          <div className="dorbit-info"><strong>{d.name}</strong><span>{d.region} · {d.detail}</span></div>
         </div>)}
       </div>
 
