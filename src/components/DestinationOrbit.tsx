@@ -109,7 +109,7 @@ export default function DestinationOrbit() {
   return <section className="orbit-section" id="destinations">
     <div className="orbit-head">
       <span className="eyebrow eyebrow-light">A whole world in one country</span>
-      <h2>{['Find', 'your', 'kind'].map((w, i) => <span className="orbit-word" key={w} style={{ animationDelay: `${0.1 + i * 0.12}s` }}>{w}&nbsp;</span>)}<br />{['of', 'wild.'].map((w, i) => <span className="orbit-word" key={w} style={{ animationDelay: `${0.46 + i * 0.12}s` }}>{w}&nbsp;</span>)}</h2>
+      <div className="orbit-ticker"><h2 className="orbit-ticker-track">Find your kind of wild.</h2></div>
     </div>
 
     <div className="orbit-stage">

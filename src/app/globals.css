@@ -2100,16 +2100,22 @@ img {
   color: #f8f2e8;
   overflow: hidden;
 }
-.orbit-word {
-  display: inline-block;
-  opacity: 0;
-  transform: translateY(28px);
-  animation: orbit-word-in 0.7s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+.orbit-ticker {
+  overflow: hidden;
+  width: 100%;
 }
-@keyframes orbit-word-in {
+.orbit-ticker-track {
+  display: inline-block;
+  margin: 0;
+  white-space: nowrap;
+  animation: orbit-ticker 9s linear infinite;
+}
+@keyframes orbit-ticker {
+  from {
+    transform: translateX(-100%);
+  }
   to {
-    opacity: 1;
-    transform: translateY(0);
+    transform: translateX(100vw);
   }
 }
 .orbit-head {
