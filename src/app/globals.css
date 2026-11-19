@@ -1661,7 +1661,11 @@ img {
     font-size: clamp(42px, 8vw, 70px);
   }
   .hero-elevation {
-    display: none;
+    top: 112px;
+    bottom: auto;
+  }
+  .hero-elevation span {
+    font-size: 30px;
   }
   .destination-grid {
     grid-template-rows: clamp(200px, 38vw, 350px) clamp(170px, 27vw, 240px);
@@ -1700,10 +1704,10 @@ img {
     background-position: 39% 50%;
   }
   .hero-mountain {
-    height: 46vw;
+    height: 42vw;
     max-height: none;
-    left: -10%;
-    right: -10%;
+    left: -6%;
+    right: -6%;
   }
   .hero-mountain-image {
     object-position: center bottom;
@@ -1732,6 +1736,22 @@ img {
   .hero-destination-link img {
     width: 58px;
     height: 58px;
+  }
+  .hero-elevation {
+    top: 96px;
+    right: var(--pad);
+    bottom: auto;
+    align-items: flex-end;
+    gap: 6px;
+  }
+  .hero-elevation small {
+    font-size: 8px;
+  }
+  .hero-elevation span {
+    font-size: 24px;
+  }
+  .hero-elevation i {
+    height: 34px;
   }
   .hero-bottom-label {
     bottom: 15px;
