@@ -2122,6 +2122,8 @@ img {
   align-items: center;
   gap: clamp(20px, 3vw, 50px);
   min-height: min(62svh, 620px);
+  max-width: 1280px;
+  margin: 0 auto;
 }
 .orbit-info {
   display: flex;
