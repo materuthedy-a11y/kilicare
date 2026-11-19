@@ -106,6 +106,7 @@ export default function DestinationOrbit() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => { place(); }, [idx]);
 
   useEffect(() => {
