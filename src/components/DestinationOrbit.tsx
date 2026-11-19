@@ -109,7 +109,7 @@ export default function DestinationOrbit() {
   return <section className="orbit-section" id="destinations">
     <div className="orbit-head">
       <span className="eyebrow eyebrow-light">A whole world in one country</span>
-      <div className="orbit-ticker"><h2 className="orbit-ticker-track">Find your kind of wild.</h2></div>
+      <div className="orbit-ticker"><h2 className="orbit-ticker-track">Every trail has a story.</h2></div>
     </div>
 
     <div className="orbit-stage">
