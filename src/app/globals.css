@@ -2532,16 +2532,29 @@ img {
     max-width: none;
   }
   .orbit-bottom {
-    grid-template-columns: 1fr;
-    justify-items: center;
-    text-align: center;
-    gap: 22px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px 18px;
+    width: 100%;
+    margin-top: 26px;
   }
   .orbit-motto {
     display: none;
   }
   .orbit-count {
-    align-items: center;
+    align-items: flex-end;
+    margin-left: auto;
+  }
+  .orbit-sizes {
+    flex-wrap: wrap;
+    justify-content: center;
+    row-gap: 8px;
+  }
+  .orbit-sizes button {
+    width: 36px;
+    height: 36px;
   }
 }
 @media (prefers-reduced-motion: reduce) {
