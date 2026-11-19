@@ -1661,8 +1661,11 @@ img {
     font-size: clamp(42px, 8vw, 70px);
   }
   .hero-elevation {
-    top: 112px;
+    top: 44%;
+    right: var(--pad);
     bottom: auto;
+    transform: translateY(-50%);
+    align-items: flex-end;
   }
   .hero-elevation span {
     font-size: 30px;
@@ -1738,9 +1741,10 @@ img {
     height: 58px;
   }
   .hero-elevation {
-    top: 96px;
+    top: 50%;
     right: var(--pad);
     bottom: auto;
+    transform: translateY(-50%);
     align-items: flex-end;
     gap: 6px;
   }
