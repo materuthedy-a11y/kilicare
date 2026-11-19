@@ -11,6 +11,7 @@ const pad = (n: number) => String(n).padStart(2, '0');
 
 export default function DestinationOrbit() {
   const [idx, setIdx] = useState(0);
+  const [open, setOpen] = useState<number | null>(null);
   const [tick, setTick] = useState(0);
   const orbitRef = useRef<HTMLDivElement>(null);
   const orbRefs = useRef<(HTMLDivElement | null)[]>([]);
@@ -82,6 +83,7 @@ export default function DestinationOrbit() {
     const ro = new ResizeObserver(place);
     if (orbitRef.current) ro.observe(orbitRef.current);
     const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setOpen(null);
       if (e.key === 'ArrowRight') { go(idx + 1, 1); restart(); }
       if (e.key === 'ArrowLeft') { go(idx - 1, -1); restart(); }
     };
@@ -106,6 +108,13 @@ export default function DestinationOrbit() {
 
   useEffect(() => { place(); }, [idx]);
 
+  useEffect(() => {
+    document.body.style.overflow = open === null ? '' : 'hidden';
+    return () => { document.body.style.overflow = ''; };
+  }, [open]);
+
+  const shown = open === null ? null : destinations[open];
+
   return <section className="orbit-section" id="destinations">
     <div className="orbit-head">
       <span className="eyebrow eyebrow-light">A whole world in one country</span>
@@ -121,7 +130,9 @@ export default function DestinationOrbit() {
       </div>
 
       <div className="orbit-ring" ref={orbitRef} aria-label="Tanzania destinations">
-        {destinations.map((d, j) => <div className="dorbit" key={d.name} ref={(el) => { orbRefs.current[j] = el; }} aria-hidden={j !== idx} tabIndex={j === idx ? 0 : -1}>
+        {destinations.map((d, j) => <div className="dorbit" key={d.name} ref={(el) => { orbRefs.current[j] = el; }} aria-hidden={j !== idx} tabIndex={j === idx ? 0 : -1}
+          onClick={() => { go(j, j >= idx ? 1 : -1); setOpen(j); }}
+          onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setOpen(j); } }}>
           <div className="dorbit-in">
             <Image src={`/img/destinations/${d.image}.webp`} alt={j === idx ? `${d.name}, ${d.region}` : ''} width={220} height={220} sizes="(max-width: 1000px) 40vw, 22vw" />
             <span className="dorbit-name">{d.name}</span>
@@ -151,5 +162,18 @@ export default function DestinationOrbit() {
         <div className="orbit-count-row"><b>{pad(idx + 1)}</b><span className="orbit-timebar" aria-hidden="true"><i key={tick} /></span><span>{pad(N)}</span></div>
       </div>
     </div>
+
+    {shown && <div className="dorbit-modal" role="dialog" aria-modal="true" aria-label={`${shown.name} details`} onClick={() => setOpen(null)}>
+      <div className="dorbit-modal-card" onClick={(e) => e.stopPropagation()}>
+        <button type="button" className="dorbit-modal-close" aria-label="Close" onClick={() => setOpen(null)}>×</button>
+        <div className="dorbit-modal-img"><Image src={`/img/destinations/${shown.image}.webp`} alt={`${shown.name}, ${shown.region}`} width={640} height={420} sizes="(max-width: 1000px) 92vw, 420px" /></div>
+        <div className="dorbit-modal-body">
+          <span className="orbit-tag"><i />{shown.region} · Tanzania</span>
+          <h3>{shown.name}</h3>
+          <p>{shown.detail}</p>
+          <a className="orbit-cta" href="#booking" onClick={() => setOpen(null)}>Plan this trip <span aria-hidden="true">↗</span></a>
+        </div>
+      </div>
+    </div>}
   </section>;
 }
