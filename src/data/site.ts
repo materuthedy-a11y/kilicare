@@ -47,12 +47,12 @@ export const reviews = [
 ];
 
 export const gallery = [
-  { src: '/img/gallery/g1.jpg', alt: 'Mount Kilimanjaro rising above the clouds', caption: 'The roof of Africa', className: 'gallery-wide' },
-  { src: '/img/gallery/g2.jpg', alt: 'Safari vehicle on the Serengeti at sunset', caption: 'Golden hour on safari', className: '' },
-  { src: '/img/gallery/g3.jpg', alt: 'Turquoise ocean and white sand in Zanzibar', caption: 'A slower kind of day', className: '' },
-  { src: '/img/gallery/g4.jpg', alt: 'Giraffe moving through green woodland', caption: 'A quiet encounter', className: '' },
-  { src: '/img/gallery/g5.jpg', alt: 'Flamingos gathered along a Rift Valley lake', caption: 'Life along the lake', className: 'gallery-wide' },
-  { src: '/img/gallery/g6.jpg', alt: 'A tent under a brilliant night sky', caption: 'Under a million stars', className: '' },
+  { src: '/img/gallery/g1.webp', alt: 'Mount Kilimanjaro rising above the clouds', caption: 'The roof of Africa', className: 'gallery-wide' },
+  { src: '/img/gallery/g2.webp', alt: 'Safari vehicle on the Serengeti at sunset', caption: 'Golden hour on safari', className: '' },
+  { src: '/img/gallery/g3.webp', alt: 'Turquoise ocean and white sand in Zanzibar', caption: 'A slower kind of day', className: '' },
+  { src: '/img/gallery/g4.webp', alt: 'Giraffe moving through green woodland', caption: 'A quiet encounter', className: '' },
+  { src: '/img/gallery/g5.webp', alt: 'Flamingos gathered along a Rift Valley lake', caption: 'Life along the lake', className: 'gallery-wide' },
+  { src: '/img/gallery/g6.webp', alt: 'A tent under a brilliant night sky', caption: 'Under a million stars', className: '' },
 ];
 
 export const faqs = [

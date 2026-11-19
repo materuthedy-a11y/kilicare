@@ -1,11 +1,9 @@
 'use client';
 
-import { useLayoutEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import Image from 'next/image';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
-gsap.registerPlugin(ScrollTrigger);
+const MOUNTAIN_BLUR = 'data:image/webp;base64,UklGRsoAAABXRUJQVlA4IL4AAACwBACdASogABAAPu1orU2ppqSiMAgBMB2JZACsAYtgtlmq19h38HaZdvVKGhQAAP7+iMdHq/hW5nnqLEqfhffjxupbsijf5crgfSXWkVuf7UVaVqN4oo9Se2NI+bK9OmKZy0yMFid0Tj3njYkPmJOTuNPSiPOf6BuzvO4aDALGbAk4vnz+igE8w5LNpxZRkn9JPpUQbBinrsr0W3f5asDfvWtdWg5xfpflh1YIHW6gyYUVjmVLLG++CVjqnUAA';
 
 export default function Hero() {
   const root = useRef<HTMLElement>(null);
@@ -16,10 +14,16 @@ export default function Hero() {
   const intro = useRef<HTMLDivElement>(null);
   const meter = useRef<HTMLSpanElement>(null);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     const section = root.current;
     if (!section) return;
-    const context = gsap.context(() => {
+    let context: { revert: () => void } | undefined;
+    let cancelled = false;
+    (async () => {
+      const [{ default: gsap }, { ScrollTrigger }] = await Promise.all([import('gsap'), import('gsap/ScrollTrigger')]);
+      if (cancelled || !section.isConnected) return;
+      gsap.registerPlugin(ScrollTrigger);
+      context = gsap.context(() => {
       const media = gsap.matchMedia();
       media.add('(prefers-reduced-motion: no-preference)', () => {
         const vh = window.innerHeight;
@@ -42,8 +46,9 @@ export default function Hero() {
         if (meter.current) meter.current.textContent = '5,895 m';
       });
       return () => media.revert();
-    }, section);
-    return () => context.revert();
+      }, section);
+    })();
+    return () => { cancelled = true; context?.revert(); };
   }, []);
 
   return <section ref={root} className="hero" aria-label="Kilicare Adventure">
@@ -52,15 +57,15 @@ export default function Hero() {
       <div className="hero-photo" ref={photo} aria-hidden="true" />
       <div className="hero-sky-wash" aria-hidden="true" />
       <h1 ref={word} className="hero-word" aria-hidden="true">KILICARE</h1>
-      <div className="hero-mountain" ref={mountain} aria-hidden="true"><Image src="/img/hero/snow-capped-mountain.png" alt="" fill priority sizes="100vw" className="hero-mountain-image" /></div>
+      <div className="hero-mountain" ref={mountain} aria-hidden="true"><Image src="/img/hero/snow-capped-mountain.webp" alt="" fill priority quality={80} placeholder="blur" blurDataURL={MOUNTAIN_BLUR} sizes="100vw" className="hero-mountain-image" /></div>
       <div className="hero-grain" aria-hidden="true" />
       <div className="hero-shade" ref={shade} />
       <div className="hero-intro" ref={intro}><span className="hero-tag"><i /> Karibu Kilicare</span><p>Climb higher.<br />Wander further.</p><a className="hero-button" href="#destinations">Explore Tanzania <span>↘</span></a></div>
       <div className="hero-elevation"><small>ELEVATION</small><span ref={meter}>5,895 m</span><i /></div>
       <nav className="hero-destination-nav" aria-label="Explore Tanzania destinations">
         <a className="hero-destination-link" href="#destinations" title="Photo by Halidtz, Wikimedia Commons, CC BY-SA 4.0"><Image src="/img/destinations/materuni-waterfalls.webp" alt="" width={160} height={160} /><span>Materuni</span></a>
-        <a className="hero-destination-link" href="#routes"><Image src="/img/destinations/kilimanjaro.jpg" alt="" width={160} height={160} /><span>Kilimanjaro</span></a>
-        <a className="hero-destination-link" href="#destinations"><Image src="/img/destinations/serengeti.jpg" alt="" width={160} height={160} /><span>Serengeti</span></a>
+        <a className="hero-destination-link" href="#routes"><Image src="/img/destinations/kilimanjaro.webp" alt="" width={160} height={160} /><span>Kilimanjaro</span></a>
+        <a className="hero-destination-link" href="#destinations"><Image src="/img/destinations/serengeti.webp" alt="" width={160} height={160} /><span>Serengeti</span></a>
       </nav>
       <div className="hero-bottom-label"><span>TANZANIA, EAST AFRICA</span><span>03°04′ S &nbsp; 37°21′ E</span></div>
     </div>

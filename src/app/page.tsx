@@ -5,7 +5,7 @@ import BookingForm from '@/components/BookingForm';
 import Image from 'next/image';
 import { destinations, packages, reasons, steps, reviews, gallery, faqs, stats } from '@/data/site';
 
-const image = (name: string) => `/img/destinations/${name}.jpg`;
+const image = (name: string) => `/img/destinations/${name}.webp`;
 
 export default function Home() {
   return (
