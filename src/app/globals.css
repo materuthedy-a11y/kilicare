@@ -1700,10 +1700,10 @@ img {
     background-position: 39% 50%;
   }
   .hero-mountain {
-    height: 42vw;
+    height: 46vw;
     max-height: none;
-    left: -6%;
-    right: -6%;
+    left: -10%;
+    right: -10%;
   }
   .hero-mountain-image {
     object-position: center bottom;

@@ -29,19 +29,19 @@ export default function Hero() {
         const vh = window.innerHeight;
         const timeline = gsap.timeline({
           defaults: { ease: 'none' },
-          scrollTrigger: { trigger: section, start: 'top top', end: () => `+=${window.innerHeight * 1.7}`, scrub: 1, invalidateOnRefresh: true },
+          scrollTrigger: { trigger: section, start: 'top top', end: () => `+=${window.innerHeight * 2.2}`, scrub: 1, invalidateOnRefresh: true },
         });
-        timeline.to(intro.current, { opacity: 0, y: -40, duration: 0.35 }, 0)
+        timeline.to(intro.current, { opacity: 0, y: -40, duration: 0.3 }, 0)
           .to(photo.current, { scale: 1.12, duration: 1 }, 0)
           .to(mountain.current, { y: -vh * 0.17, scaleX: 1.45, scaleY: 1.1, transformOrigin: '50% 100%', duration: 1 }, 0)
-          .to(word.current, { y: vh * 0.3, scale: 0.85, duration: 1 }, 0)
-          .to(word.current, { opacity: 0, duration: 0.3 }, 0.7)
+          .to(word.current, { y: vh * 0.32, scale: 0, duration: 1 }, 0)
+          .to(word.current, { opacity: 0, duration: 0.22 }, 0.78)
           .to(shade.current, { opacity: 0.82, duration: 0.8 }, 0.1);
       });
       media.add('(prefers-reduced-motion: reduce)', () => {
         gsap.set(intro.current, { opacity: 0 });
         gsap.set(mountain.current, { y: -window.innerHeight * 0.17, scaleX: 1.45, scaleY: 1.1, transformOrigin: '50% 100%' });
-        gsap.set(word.current, { y: window.innerHeight * 0.3, scale: 0.85, opacity: 0 });
+        gsap.set(word.current, { y: window.innerHeight * 0.32, scale: 0, opacity: 0 });
         gsap.set(shade.current, { opacity: 0.82 });
         if (meter.current) meter.current.textContent = '5,895 m';
       });
