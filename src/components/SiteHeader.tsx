@@ -3,6 +3,9 @@
 import { useEffect, useRef, useState } from 'react';
 import type { CSSProperties } from 'react';
 import Image from 'next/image';
+import { siteConfig } from '@/data/site';
+
+const WhatsAppIcon = () => <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M12.04 2a9.9 9.9 0 0 0-8.4 15.2L2 22l4.9-1.6A9.9 9.9 0 1 0 12.04 2Zm0 18.1a8.1 8.1 0 0 1-4.1-1.1l-.3-.2-2.9.9.9-2.8-.2-.3a8.1 8.1 0 1 1 6.6 3.5Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4 0-.5.2-.8l.5-.6c.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5l-.8-1.9c-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.2.3-.9.9-.9 2.2s.9 2.5 1.1 2.7c.1.2 1.9 2.9 4.6 4 1.7.7 2.3.8 3.1.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.5-.3Z"/></svg>;
 
 const links = [
   ['Destinations', '#destinations'], ['Packages', '#packages'], ['About', '#about'], ['Routes', '#routes'], ['FAQs', '#faq'],
@@ -14,6 +17,8 @@ export default function SiteHeader() {
   const [hidden, setHidden] = useState(false);
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState('');
+  const [langOpen, setLangOpen] = useState(false);
+  const [lang, setLang] = useState<'EN' | 'SW'>('EN');
   const progress = useRef<HTMLElement>(null);
   const menuRef = useRef<HTMLDivElement>(null);
   const toggleRef = useRef<HTMLButtonElement>(null);
@@ -87,7 +92,14 @@ export default function SiteHeader() {
           {links.map(([label, href]) => <a href={href} key={label} className={active === href.slice(1) ? 'is-active' : ''}>{label}</a>)}
         </nav>
         <div className="header-actions">
+          <div className="lang-switch">
+            <button type="button" className="lang-toggle" aria-haspopup="listbox" aria-expanded={langOpen} onClick={() => setLangOpen((v) => !v)}>{lang}<span aria-hidden="true">▾</span></button>
+            {langOpen && <div className="lang-menu" role="listbox" aria-label="Language">
+              {(['EN', 'SW'] as const).map((code) => <button type="button" key={code} role="option" aria-selected={lang === code} className={lang === code ? 'is-active' : ''} onClick={() => { setLang(code); setLangOpen(false); }}>{code === 'EN' ? 'English' : 'Kiswahili'}</button>)}
+            </div>}
+          </div>
           <a className="header-cta" href="#booking">Book your trip <span className="cta-arrow" aria-hidden="true">↗</span></a>
+          <a className="wa-link" href={siteConfig.whatsappUrl} target="_blank" rel="noopener noreferrer" aria-label="Chat with us on WhatsApp"><WhatsAppIcon /></a>
           <button ref={toggleRef} className="menu-toggle" type="button" aria-label={open ? 'Close menu' : 'Open menu'} aria-expanded={open} aria-controls="mobile-menu" onClick={() => setOpen(!open)}><span /><span /></button>
         </div>
       </div>
@@ -98,6 +110,8 @@ export default function SiteHeader() {
         {links.map(([label, href], index) => <a href={href} key={label} style={{ '--i': index } as CSSProperties} onClick={closeMenu}>{label}</a>)}
       </nav>
       <a className="mobile-cta" href="#booking" onClick={closeMenu}>Book your trip <span aria-hidden="true">↗</span></a>
+      <a className="mobile-wa" href={siteConfig.whatsappUrl} target="_blank" rel="noopener noreferrer" onClick={closeMenu}><WhatsAppIcon /> Chat on WhatsApp</a>
     </div>
+    <a className="wa-float" href={siteConfig.whatsappUrl} target="_blank" rel="noopener noreferrer" aria-label="Chat with us on WhatsApp"><WhatsAppIcon /></a>
   </>;
 }

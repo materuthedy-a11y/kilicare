@@ -1,3 +1,9 @@
+export const siteConfig = {
+  whatsappNumber: '255XXXXXXXXX',
+  whatsappMessage: "Hello Kilicare, I'd like to plan a trip",
+  whatsappUrl: `https://wa.me/255XXXXXXXXX?text=${encodeURIComponent("Hello Kilicare, I'd like to plan a trip")}`,
+};
+
 export const destinations = [
   { name: 'Kilimanjaro', region: 'Moshi', detail: '5,895 m · 6–9 days', image: 'kilimanjaro' },
   { name: 'Serengeti', region: 'Mara', detail: 'The great migration', image: 'serengeti' },
