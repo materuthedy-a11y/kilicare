@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import type { CSSProperties } from 'react';
+import Image from 'next/image';
 
 const links = [
   ['Destinations', '#destinations'], ['Packages', '#packages'], ['About', '#about'], ['Routes', '#routes'], ['FAQs', '#faq'],
@@ -60,7 +61,7 @@ export default function SiteHeader() {
   return <>
     <header className={`site-header${scrolled ? ' is-scrolled' : ''}${hidden ? ' is-hidden' : ''}`}>
       <div className="header-bar">
-        <a href="#top" className="brand" aria-label="Kilicare Adventure home">Kilicare<span>.</span></a>
+        <a href="#top" className="brand" aria-label="Kilicare Adventure home"><Image className="brand-mark" src="/kilicare-logo.png" alt="" width={34} height={34} priority /><span className="brand-word">Kilicare<span className="brand-dot">.</span></span></a>
         <nav className="main-nav" aria-label="Main">
           {links.map(([label, href]) => <a href={href} key={label} className={active === href.slice(1) ? 'is-active' : ''}>{label}</a>)}
         </nav>
