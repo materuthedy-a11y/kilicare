@@ -2,10 +2,9 @@ import Hero from '@/components/Hero';
 import SiteHeader from '@/components/SiteHeader';
 import RouteExplorer from '@/components/RouteExplorer';
 import BookingForm from '@/components/BookingForm';
+import DestinationOrbit from '@/components/DestinationOrbit';
 import Image from 'next/image';
-import { destinations, packages, reasons, steps, reviews, gallery, faqs, stats } from '@/data/site';
-
-const image = (name: string) => `/img/destinations/${name}.webp`;
+import { packages, reasons, steps, reviews, gallery, faqs, stats } from '@/data/site';
 
 export default function Home() {
   return (
@@ -13,14 +12,7 @@ export default function Home() {
       <SiteHeader />
       <Hero />
       <div className="cover">
-        <section className="section destinations" id="destinations">
-          <div className="section-heading"><div><span className="eyebrow">A whole world in one country</span><h2>Find your kind<br />of wild.</h2></div><p>From the roof of Africa to the quiet blue of the Indian Ocean, Tanzania has a way of staying with you.</p></div>
-          <div className="destination-grid">
-            {destinations.map((item, index) => <a className={`destination-card destination-card-${index + 1}`} href="#booking" key={item.name} style={{ backgroundImage: `linear-gradient(180deg, transparent 25%, rgba(4, 15, 26, .84) 100%), url(${image(item.image)})` }}>
-              <span className="card-index">0{index + 1} / {item.region}</span><div className="destination-copy"><span>{item.detail}</span><h3>{item.name}</h3><span className="card-arrow" aria-hidden="true">↗</span></div>
-            </a>)}
-          </div>
-        </section>
+        <DestinationOrbit />
 
         <section className="section packages" id="packages">
           <div className="section-heading"><div><span className="eyebrow">Thoughtfully put together</span><h2>Good journeys<br />start here.</h2></div><p>Small groups, local expertise and the details already taken care of. All you have to do is show up.</p></div>

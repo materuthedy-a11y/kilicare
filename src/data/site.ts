@@ -10,6 +10,7 @@ export const destinations = [
   { name: 'Zanzibar', region: 'Unguja', detail: 'Indian Ocean · 3–7 days', image: 'zanzibar' },
   { name: 'Ngorongoro', region: 'Arusha', detail: 'A world within a crater', image: 'ngorongoro' },
   { name: 'Tarangire', region: 'Manyara', detail: 'Baobabs & big herds', image: 'tarangire' },
+  { name: 'Materuni', region: 'Kilimanaro', detail: 'Waterfalls · day trip', image: 'materuni-waterfalls', badge: 'Hidden gem' },
 ];
 
 export const packages = [
