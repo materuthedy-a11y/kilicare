@@ -2301,7 +2301,7 @@ img {
   align-items: center;
   gap: 4px;
   width: max-content;
-  max-width: 240px;
+  max-width: min(240px, calc(100vw - 48px));
   padding: 10px 18px;
   border: 1px solid rgba(245, 158, 11, 0.4);
   border-radius: 16px;
